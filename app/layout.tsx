@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Allura, Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
@@ -16,6 +16,12 @@ const sans = Source_Sans_3({
   variable: "--font-source",
 });
 
+const script = Allura({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "The Scottsdale Tour",
@@ -24,7 +30,10 @@ export const metadata: Metadata = {
   description:
     "Official home of the Scottsdale Tour, a prestigious three-event championship hosted in Guelph this fall: the Scottsdale Open, Scottsdale Invitational, and Scottsdale Classic.",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
   },
 };
 
@@ -32,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${script.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

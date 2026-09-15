@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { TourWordmark } from "@/components/tour-wordmark";
 import { TourCrest } from "@/components/tour-crest";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,18 +24,12 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-3 tracking-[0.18em]"
+          className="flex items-center gap-3"
+          aria-label="The Scottsdale Tour"
           onClick={() => setOpen(false)}
         >
-          <TourCrest className="size-9 text-[color:var(--crest-gold)]" />
-          <span className="flex flex-col leading-none">
-            <span className="font-heading text-lg font-semibold uppercase text-[color:var(--cream)]">
-              Scottsdale
-            </span>
-            <span className="mt-1 text-[10px] uppercase text-[color:var(--crest-gold)]">
-              Tour · Guelph
-            </span>
-          </span>
+          <TourCrest className="h-12 text-[color:var(--crest-gold)]" />
+          <TourWordmark established className="text-[color:var(--cream)]" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

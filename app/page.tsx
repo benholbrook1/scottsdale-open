@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LeaderboardTable } from "@/components/leaderboard-table";
+import { TourCrest } from "@/components/tour-crest";
+import { TourWordmark } from "@/components/tour-wordmark";
 import { event, events, field, tour } from "@/lib/tour";
 
 const facts = [
@@ -14,37 +16,40 @@ export default function HomePage() {
     <div>
       <section className="relative overflow-hidden bg-[color:var(--pine)] text-[color:var(--cream)]">
         <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:radial-gradient(circle_at_top,oklch(0.72_0.08_85)_0,transparent_42%),linear-gradient(180deg,transparent,rgba(0,0,0,0.35))]" />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <p className="text-[11px] font-semibold tracking-[0.32em] text-[color:var(--crest-gold)] uppercase">
-            {tour.season} · {tour.city}
-          </p>
-          <h1 className="mt-4 font-heading text-5xl leading-[0.95] sm:text-7xl">
-            {tour.name}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-[color:var(--cream)]/80">
-            For years the Scottsdale Tour has been a private proving ground:
-            a small field, a high standard, and no patience for a round that is
-            merely fine. This season the Open, Invitational, and Classic will
-            put that standard on display.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              nativeButton={false}
-              render={<Link href="/leaderboard" />}
-              size="lg"
-              className="bg-[color:var(--crest-gold)] text-[color:var(--pine)] hover:bg-[color:var(--crest-gold)]/90"
-            >
-              View leaderboard
-            </Button>
-            <Button
-              nativeButton={false}
-              render={<Link href="/apply" />}
-              size="lg"
-              variant="outline"
-              className="border-[color:var(--cream)]/40 bg-transparent text-[color:var(--cream)] hover:bg-white/10 hover:text-[color:var(--cream)]"
-            >
-              Apply to the field
-            </Button>
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:flex-row lg:items-end lg:gap-16">
+          <TourCrest className="h-36 text-[color:var(--crest-gold)] sm:h-44 lg:h-56" />
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.32em] text-[color:var(--crest-gold)] uppercase">
+              {tour.season} · {tour.city}
+            </p>
+            <h1 className="mt-4">
+              <TourWordmark size="lg" className="text-[color:var(--cream)]" />
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg text-[color:var(--cream)]/80">
+              For years the Scottsdale Tour has been a private proving ground:
+              a small field, a high standard, and no patience for a round that
+              is merely fine. This season the Open, Invitational, and Classic
+              will put that standard on display.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button
+                nativeButton={false}
+                render={<Link href="/leaderboard" />}
+                size="lg"
+                className="bg-[color:var(--crest-gold)] text-[color:var(--pine)] hover:bg-[color:var(--crest-gold)]/90"
+              >
+                View leaderboard
+              </Button>
+              <Button
+                nativeButton={false}
+                render={<Link href="/apply" />}
+                size="lg"
+                variant="outline"
+                className="border-[color:var(--cream)]/40 bg-transparent text-[color:var(--cream)] hover:bg-white/10 hover:text-[color:var(--cream)]"
+              >
+                Apply to the field
+              </Button>
+            </div>
           </div>
         </div>
       </section>

@@ -22,11 +22,15 @@ const empty: FormState = {
   letter: "",
 };
 
+const minLetterLength = 80;
+
 export function ApplicationForm() {
   const [form, setForm] = useState<FormState>(empty);
   const [last, setLast] = useState<FormState | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+
+  const letterLength = form.letter.trim().length;
 
   const mailtoHref = useMemo(() => {
     if (!last) return null;
@@ -58,7 +62,9 @@ export function ApplicationForm() {
       };
 
       if (!response.ok) {
-        throw new Error(payload.error ?? "The tour desk declined this letter.");
+        throw new Error(
+          payload.error ?? "The application could not be submitted."
+        );
       }
 
       setLast(form);
@@ -66,14 +72,14 @@ export function ApplicationForm() {
       setForm(empty);
       toast.success(
         payload.emailed
-          ? "Letter received. The Commissioner has been notified."
-          : "Letter filed with the tour desk."
+          ? "Application received. The Commissioner has been notified."
+          : "Application received."
       );
     } catch (error) {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Could not file the application. Try again in a minute."
+          : "The application could not be submitted. Please try again shortly."
       );
     } finally {
       setSubmitting(false);
@@ -82,20 +88,24 @@ export function ApplicationForm() {
 
   if (sent) {
     return (
-      <div className="rounded-xl border border-[color:var(--pine)]/20 bg-card p-8 text-center shadow-sm">
-        <p className="font-heading text-3xl">Letter received</p>
-        <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-          The Commissioner will read it when he is done pretending to work on
-          his putting. If you are admitted, you will hear by group chat.
+      <div className="py-6 text-center sm:py-10">
+        <p className="text-xs tracking-[0.28em] text-[color:var(--crest-gold-deep)] uppercase">
+          Tour desk
         </p>
-        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <p className="mt-2 font-heading text-3xl">Application received</p>
+        <p className="mx-auto mt-3 max-w-md text-muted-foreground">
+          Thank you. Your letter has been filed with the Commissioner. If a
+          place in the field is offered, you will hear at the email address you
+          provided.
+        </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {mailtoHref ? (
             <Button nativeButton={false} render={<a href={mailtoHref} />} size="lg">
-              Also send from your email
+              Send a copy from your email
             </Button>
           ) : null}
           <Button variant="outline" onClick={() => setSent(false)}>
-            File another letter
+            Submit another application
           </Button>
         </div>
       </div>
@@ -103,18 +113,26 @@ export function ApplicationForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form onSubmit={onSubmit} className="space-y-6">
+      <div>
+        <h2 className="font-heading text-3xl">Application</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Required fields must be completed before the application can be filed.
+        </p>
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="name">Full name</Label>
           <Input
             id="name"
             required
+            autoComplete="name"
             value={form.name}
             onChange={(event) =>
               setForm((current) => ({ ...current, name: event.target.value }))
             }
-            placeholder="As it should appear on a bag tag"
+            placeholder="First and last name"
+            className="h-10"
           />
         </div>
         <div className="space-y-2">
@@ -123,16 +141,18 @@ export function ApplicationForm() {
             id="email"
             type="email"
             required
+            autoComplete="email"
             value={form.email}
             onChange={(event) =>
               setForm((current) => ({ ...current, email: event.target.value }))
             }
-            placeholder="Where we send the bad news"
+            placeholder="name@example.com"
+            className="h-10"
           />
         </div>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="handicap">Handicap index (optional)</Label>
+        <Label htmlFor="handicap">Handicap index</Label>
         <Input
           id="handicap"
           value={form.handicap}
@@ -142,7 +162,8 @@ export function ApplicationForm() {
               handicap: event.target.value,
             }))
           }
-          placeholder="Honesty is a selection criterion"
+          placeholder="Optional"
+          className="h-10"
         />
       </div>
       <div className="space-y-2">
@@ -150,21 +171,20 @@ export function ApplicationForm() {
         <Textarea
           id="letter"
           required
-          minLength={80}
+          minLength={minLetterLength}
           value={form.letter}
           onChange={(event) =>
             setForm((current) => ({ ...current, letter: event.target.value }))
           }
-          placeholder="Dear Commissioner, I wish to join the Scottsdale Tour because..."
-          className="min-h-48 font-serif"
+          placeholder="Playing background, competitive record, and why you are seeking a place in the field."
+          className="min-h-52 font-serif"
         />
         <p className="text-xs text-muted-foreground">
-          Minimum 80 characters. Make it a real letter. Résumés, swing thoughts,
-          and excuses for last summer&apos;s 94 are all admissible evidence.
+          Minimum {minLetterLength} characters. {letterLength} entered.
         </p>
       </div>
       <Button type="submit" size="lg" disabled={submitting} className="w-full sm:w-auto">
-        {submitting ? "Submitting to the desk…" : "Submit letter"}
+        {submitting ? "Submitting…" : "Submit application"}
       </Button>
     </form>
   );

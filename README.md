@@ -28,13 +28,16 @@ npm start
 
 ## Applications inbox
 
-Letters are pushed to a live inbox:
+Letters post to a Discord channel via webhook.
 
-**[Open the Commissioner’s inbox](https://ntfy.sh/scottsdale-open-guelph-2026-desk)**
+1. Create a private Discord server (or a private channel) for the Tour desk.
+2. Open the channel → **Edit Channel** → **Integrations** → **Webhooks** → **New Webhook**.
+3. Copy the webhook URL.
+4. Put it in `.env.local` as `TOUR_DISCORD_WEBHOOK_URL`, and add the same variable in Vercel under Project Settings → Environment Variables.
 
-Leave that tab open, or install [ntfy](https://ntfy.sh) on your phone and subscribe to `scottsdale-open-guelph-2026-desk`. Applicants can also tap “Also send from your email,” which opens a pre-filled message to `holbrook@uoguelph.ca`.
+Do not commit the webhook URL. Anyone with it can post to that channel.
 
-To use a different topic or mailbox, set `TOUR_NTFY_TOPIC` and `TOUR_INBOX_EMAIL` in `.env.local`.
+Applicants can also send a copy from their email to `holbrook@uoguelph.ca`.
 
 ## Keep it online without your laptop
 
@@ -46,4 +49,4 @@ A Cloudflare tunnel from this machine only works while the machine is on. For a 
 4. Click **Deploy**. After a minute you get a URL like `https://scottsdale-tour.vercel.app`.
 5. Share that URL. Vercel keeps serving it with your laptop closed.
 
-Incoming letters still land on the ntfy inbox above. The on-disk `applications.json` file is only a local backup and does not persist on Vercel.
+Incoming letters land in Discord. The on-disk `applications.json` file is only a local backup and does not persist on Vercel.

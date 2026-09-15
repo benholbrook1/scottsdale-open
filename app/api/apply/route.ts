@@ -16,8 +16,7 @@ const dataDir = path.join(
   "data"
 );
 const dataFile = path.join(dataDir, "applications.json");
-const ntfyTopic =
-  process.env.TOUR_NTFY_TOPIC?.trim() || "scottsdale-open-guelph-2026-desk";
+const discordWebhook = process.env.TOUR_DISCORD_WEBHOOK_URL?.trim();
 
 async function loadApplications(): Promise<Application[]> {
   try {
@@ -33,28 +32,43 @@ async function saveApplications(applications: Application[]) {
   await writeFile(dataFile, JSON.stringify(applications, null, 2), "utf8");
 }
 
-async function notifyCommissioner(application: Application) {
-  const body = [
-    `From: ${application.name} <${application.email}>`,
-    `Handicap: ${application.handicap || "Not given"}`,
-    `Filed: ${application.submittedAt}`,
-    "",
-    application.letter,
-  ].join("\n");
+function applicationLetter(letter: string) {
+  if (letter.length <= 4096) return letter;
+  return `${letter.slice(0, 4090)}…`;
+}
 
-  const response = await fetch("https://ntfy.sh/", {
+async function notifyCommissioner(application: Application) {
+  if (!discordWebhook) {
+    throw new Error("Discord webhook is not configured.");
+  }
+
+  const response = await fetch(discordWebhook, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      topic: ntfyTopic,
-      title: `Scottsdale Tour application - ${application.name}`,
-      tags: ["golf", "mailbox"],
-      message: body,
+      username: "Scottsdale Tour Desk",
+      embeds: [
+        {
+          title: `Application — ${application.name}`,
+          color: 0x1e3d32,
+          timestamp: application.submittedAt,
+          fields: [
+            { name: "Name", value: application.name, inline: true },
+            { name: "Email", value: application.email, inline: true },
+            {
+              name: "Handicap",
+              value: application.handicap || "Not given",
+              inline: true,
+            },
+          ],
+          description: applicationLetter(application.letter),
+        },
+      ],
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`Tour desk notify returned ${response.status}`);
+    throw new Error(`Discord webhook returned ${response.status}`);
   }
 }
 
@@ -64,7 +78,7 @@ export async function POST(request: Request) {
   try {
     body = (await request.json()) as Partial<Application>;
   } catch {
-    return NextResponse.json({ error: "Send a JSON letter." }, { status: 400 });
+    return NextResponse.json({ error: "Please send a valid application." }, { status: 400 });
   }
 
   const name = body.name?.trim() ?? "";
@@ -74,21 +88,21 @@ export async function POST(request: Request) {
 
   if (name.length < 2) {
     return NextResponse.json(
-      { error: "A name is required for the bag tag." },
+      { error: "A full name is required." },
       { status: 400 }
     );
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json(
-      { error: "Give the Commissioner a real email address." },
+      { error: "Please provide a valid email address." },
       { status: 400 }
     );
   }
 
   if (letter.length < 80) {
     return NextResponse.json(
-      { error: "That is not a letter. Write at least 80 characters." },
+      { error: "Your letter must be at least 80 characters." },
       { status: 400 }
     );
   }

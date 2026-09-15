@@ -94,7 +94,7 @@ export const field: Player[] = [
     homeCourse: "Elmira Golf Club",
     careerBegan: 2020,
     eventScores: { open: null, invitational: null, classic: null },
-    bio: "Currently on a hot streak with his short game, and looking for the same consistency with his driver. The longest-tenured player in the field, he has spent six seasons at Elmira figuring out how to score on days when the tee ball is not cooperating. Known for getting up and down from spots that should not yield a par, and for a putting stroke that has quietly become the most reliable in the group.",
+    bio: "Currently on a hot streak with his short game, and looking for the same consistency with his driver. The longest-tenured player in the field, he has spent six seasons at Elmira figuring out how to score when the tee ball will not cooperate. Known for getting up and down from spots that should not yield a par, and for a putting stroke that has quietly become the most reliable on the Tour.",
   },
   {
     id: "summers",
@@ -105,7 +105,7 @@ export const field: Player[] = [
     homeCourse: "Centennial Golf Course",
     careerBegan: 2024,
     eventScores: { open: null, invitational: null, classic: null },
-    bio: "One of the longest hitters on the tour, and working to fight off the tops off the tee. When he catches one, it is usually the longest ball in the group by a clear margin. Two seasons in, the project is turning that length into fairways and scoring chances instead of a search down the left side. Has the kind of speed that makes par 5s feel reachable, provided the ball is on the clubface.",
+    bio: "One of the longest hitters on the tour, and working to fight off the tops off the tee. When he catches one, it is usually the longest ball in the group by a clear margin, and par 5s start to look reachable. Two seasons in, the project is turning that raw length into fairways and scoring chances instead of another long walk searching down the left side. Speed like that will change a hole.",
   },
   {
     id: "crowdy",
@@ -116,7 +116,7 @@ export const field: Player[] = [
     homeCourse: "Centennial Golf Course",
     careerBegan: 2025,
     eventScores: { open: null, invitational: null, classic: null },
-    bio: "His game blossomed in the Next Golf simulator. He is looking to translate that away from the sim and into the spotlight of the Scottsdale Tour. Recently switched to stiff shafts and is hoping to see improvement from that in his game.",
+    bio: "His game blossomed in the Next Golf simulator, where the numbers looked like they belonged to a much longer career. He is looking to take that swing off the screen and onto the Scottsdale Tour, where the ball sits down and the wind is not a setting. Recently switched to stiff shafts, hoping the extra load settles a game built indoors before it has to hold up when a round actually counts.",
   },
 ];
 

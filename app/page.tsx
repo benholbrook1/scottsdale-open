@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LeaderboardTable } from "@/components/leaderboard-table";
 import { event, events, field, tour } from "@/lib/tour";
@@ -51,25 +50,19 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs tracking-[0.28em] text-[color:var(--crest-gold-deep)] uppercase">
-              2026 schedule
-            </p>
-            <h2 className="mt-2 font-heading text-4xl">
-              A prestigious set of events
-            </h2>
-          </div>
-          <Badge variant="secondary" className="tracking-wide uppercase">
-            Locations and times TBD
-          </Badge>
+        <div>
+          <p className="text-xs tracking-[0.28em] text-[color:var(--crest-gold-deep)] uppercase">
+            2026 schedule
+          </p>
+          <h2 className="mt-2 font-heading text-4xl">
+            A prestigious set of events
+          </h2>
         </div>
 
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
           {tour.name} is a championship of three events: the Open, the
           Invitational, and the Classic. Each is eighteen holes of stroke play.
-          Dates, venues, and tee times will be announced. The field is small,
-          admission is by letter, and the stationery is official.
+          Dates, venues, and tee times will be announced.
         </p>
 
         <ol className="mt-10 grid gap-4 lg:grid-cols-3">
@@ -155,7 +148,7 @@ export default function HomePage() {
           {field.map((player) => (
             <li
               key={player.id}
-              className="flex flex-col rounded-xl border bg-card px-5 py-6 shadow-sm"
+              className="flex h-full flex-col rounded-xl border bg-card px-5 py-6 shadow-sm"
             >
               <p className="font-heading text-2xl">{player.name}</p>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -186,7 +179,7 @@ export default function HomePage() {
                 </div>
               </dl>
               {player.bio ? (
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {player.bio}
                 </p>
               ) : null}

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/", label: "The Open" },
+  { href: "/", label: "The Tour" },
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/apply", label: "Applications" },
 ];

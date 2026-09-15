@@ -1,12 +1,12 @@
 # The Scottsdale Tour
 
-Official (joke) website for **the Scottsdale Tour**, a golf circuit hosted in Guelph, Ontario this fall. The opening event is the **Scottsdale Open**. Date, tee time, and venue are TBD.
+Official (joke) website for **the Scottsdale Tour**, a prestigious three-event championship hosted in Guelph, Ontario this fall. In order: the **Scottsdale Open**, the **Scottsdale Invitational**, and the **Scottsdale Classic**. Locations and times are TBD.
 
 The founding field is Ben Holbrook, Evan Summers, and Ben Crowdy. Everyone else has to write a letter.
 
 ## What's on the site
 
-- Event overview for the Scottsdale Open
+- Season schedule for the Open, Invitational, and Classic
 - An empty official leaderboard (all even par, play has not begun)
 - An applications page that accepts a written letter and notifies the Commissioner
 

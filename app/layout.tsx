@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · The Scottsdale Tour",
   },
   description:
-    "Official home of the Scottsdale Tour, a golf circuit hosted in Guelph this fall. First event: the Scottsdale Open.",
+    "Official home of the Scottsdale Tour, a prestigious three-event championship hosted in Guelph this fall: the Scottsdale Open, Scottsdale Invitational, and Scottsdale Classic.",
   icons: {
     icon: "/favicon.svg",
   },

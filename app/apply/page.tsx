@@ -17,7 +17,7 @@ export default function ApplyPage() {
       <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
         The Scottsdale Tour does not take phone calls, DMs, or &ldquo;I&apos;ll
         just show up.&rdquo; Write a letter. Say who you are, why the field
-        should let you in, and what you intend to do with a round in Guelph.
+        should let you in, and what you intend to do with three rounds in Guelph.
         Letters are filed with the tour desk and forwarded to the Commissioner.
       </p>
       <div className="mt-10 rounded-xl border bg-card p-5 shadow-sm sm:p-8">

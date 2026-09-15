@@ -11,9 +11,9 @@ export function SiteFooter() {
           </span>
         </p>
         <p className="max-w-md text-sm text-[color:var(--cream)]/70">
-          A friends&apos; golf tour with official stationery. Applications are
-          read by the Commissioner and, when the internet cooperates, emailed to
-          the tour desk.
+          A prestigious three-event championship with official stationery.
+          Applications are read by the Commissioner and, when the internet
+          cooperates, emailed to the tour desk.
         </p>
       </div>
     </footer>

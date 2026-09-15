@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatScore, leaderboardRows } from "@/lib/tour";
+import { events, formatScore, leaderboardRows } from "@/lib/tour";
 
 export function LeaderboardTable() {
   const rows = leaderboardRows();
@@ -18,19 +18,21 @@ export function LeaderboardTable() {
           <TableRow className="bg-[color:var(--pine)] hover:bg-[color:var(--pine)]">
             <TableHead className="w-16 text-[color:var(--cream)]">Pos</TableHead>
             <TableHead className="text-[color:var(--cream)]">Player</TableHead>
+            {events.map((stop) => (
+              <TableHead
+                key={stop.id}
+                className="text-right text-[color:var(--cream)]"
+              >
+                {stop.name.replace("Scottsdale ", "")}
+              </TableHead>
+            ))}
             <TableHead className="text-right text-[color:var(--cream)]">
               Total
-            </TableHead>
-            <TableHead className="text-right text-[color:var(--cream)]">
-              Thru
-            </TableHead>
-            <TableHead className="hidden text-right text-[color:var(--cream)] sm:table-cell">
-              Today
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map(({ pos, player }) => (
+          {rows.map(({ pos, player, total }) => (
             <TableRow key={player.id} className="h-14">
               <TableCell className="font-heading text-lg">{pos}</TableCell>
               <TableCell>
@@ -41,23 +43,21 @@ export function LeaderboardTable() {
                   </span>
                 </div>
               </TableCell>
+              {events.map((stop) => (
+                <TableCell
+                  key={stop.id}
+                  className="text-right font-heading text-lg"
+                >
+                  {formatScore(player.eventScores[stop.id] ?? null)}
+                </TableCell>
+              ))}
               <TableCell className="text-right font-heading text-lg">
-                {formatScore(player.scoreToPar)}
-              </TableCell>
-              <TableCell className="text-right text-muted-foreground">
-                {player.thru}
-              </TableCell>
-              <TableCell className="hidden text-right text-muted-foreground sm:table-cell">
-                {player.today}
+                {formatScore(total)}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <p className="border-t bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
-        Official scoring has not opened. The field is even par by administrative
-        courtesy until someone actually hits a ball.
-      </p>
     </div>
   );
 }

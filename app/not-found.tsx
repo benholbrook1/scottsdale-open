@@ -12,7 +12,7 @@ export default function NotFound() {
         Take a drop, add a stroke, and return to the clubhouse.
       </p>
       <Button nativeButton={false} render={<Link href="/" />} className="mt-8">
-        Back to the Open
+        Back to the Tour
       </Button>
     </div>
   );
